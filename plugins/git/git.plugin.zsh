@@ -45,6 +45,8 @@ compdef git-svn-dcommit-push=git
 
 alias gsr='git svn rebase'
 alias gsd='git svn dcommit'
+
+
 #
 # Will return the current branch name
 # Usage example: git pull origin $(current_branch)
@@ -62,6 +64,13 @@ function gbabydate() {
     do
         echo -e `git log -1 --format=%Cgreen%ci%Creset "$b" --`\\t"$b";
     done | sort
+}
+
+function current_repository() {
+
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo $(git remote -v | cut -d':' -f 2)
+
 }
 
 # these aliases take advantage of the previous function
